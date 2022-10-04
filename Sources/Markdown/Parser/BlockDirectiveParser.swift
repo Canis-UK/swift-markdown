@@ -672,7 +672,7 @@ private enum ParseContainer: CustomStringConvertible {
             return [.blockDirective(name: String(pendingBlockDirective.name),
                                     nameLocation: pendingBlockDirective.atLocation,
                                     argumentText: DirectiveArgumentText(segments: pendingBlockDirective.argumentsText.map {
-                                        let untrimmedText = String($0.text.base[$0.text.base.startIndex..<$0.text.endIndex])
+                                        let untrimmedText = $0.text.base[$0.text.base.startIndex..<$0.text.endIndex]
                                         return DirectiveArgumentText.LineSegment(untrimmedText: untrimmedText, lineStartIndex: untrimmedText.startIndex, parseIndex: $0.text.startIndex, range: $0.range)
                                     }),
                                     parsedRange: pendingBlockDirective.atLocation..<pendingBlockDirective.endLocation,

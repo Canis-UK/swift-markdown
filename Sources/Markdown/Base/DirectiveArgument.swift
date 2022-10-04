@@ -44,7 +44,7 @@ public struct DirectiveArgumentText: Equatable {
     /// A segment of a line of argument text.
     public struct LineSegment: Equatable {
         /// The segment's untrimmed text from which arguments can be parsed.
-        public var untrimmedText: String
+        public var untrimmedText: Substring
 
         /// The index in ``untrimmedText`` where the line started.
         public var lineStartIndex: String.Index
@@ -68,7 +68,7 @@ public struct DirectiveArgumentText: Equatable {
         ///   - parseIndex: index from which parsing should start.
         ///   - range: The range from which a segment was extracted from a line
         ///     of source, or `nil` if the argument text was provided by other means.
-        init(untrimmedText: String, lineStartIndex: String.Index, parseIndex: String.Index? = nil, range: SourceRange? = nil) {
+        init(untrimmedText: Substring, lineStartIndex: String.Index, parseIndex: String.Index? = nil, range: SourceRange? = nil) {
             self.untrimmedText = untrimmedText
             self.lineStartIndex = lineStartIndex
             self.parseIndex = parseIndex ?? untrimmedText.startIndex
@@ -282,7 +282,7 @@ public struct DirectiveArgumentText: Equatable {
     /// Create a body of argument text as a single, rangeless ``LineSegment``
     /// from a string.
     public init<S: StringProtocol>(_ string: S) {
-        let text = String(string)
+        let text = String(string)[...]
         self.segments = [LineSegment(untrimmedText: text, lineStartIndex: text.startIndex, range: nil)]
     }
 

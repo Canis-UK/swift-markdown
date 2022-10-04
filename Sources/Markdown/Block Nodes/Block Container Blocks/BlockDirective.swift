@@ -93,9 +93,8 @@ public extension BlockDirective {
         let argumentSegments = argumentText?.split(separator: "\n",
                                                    maxSplits: .max,
                                                    omittingEmptySubsequences: false).map { lineText -> DirectiveArgumentText.LineSegment in
-                                                    let untrimmedText = String(lineText)
-                                                    return DirectiveArgumentText.LineSegment(untrimmedText: untrimmedText,
-                                                                                             lineStartIndex: untrimmedText.startIndex,
+                                                    return DirectiveArgumentText.LineSegment(untrimmedText: lineText,
+                                                                                             lineStartIndex: lineText.startIndex,
                                                                                              range: nil)
                                                    } ?? []
         try! self.init(.blockDirective(name: name,
